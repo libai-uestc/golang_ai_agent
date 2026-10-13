@@ -7,6 +7,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/cloudwego/eino/adk"
 	"github.com/cloudwego/eino/components/prompt"
 	"github.com/cloudwego/eino/schema"
 )
@@ -66,5 +67,47 @@ func RunChatModel(stream bool) {
 			fmt.Print(message.Content)
 		}
 		fmt.Println()
+	}
+}
+
+func RunChatModelAgent() {
+	ctx := context.Background()
+	messages := createMessagesByTemplate()
+	chatModel := CreateDeepseekModel()
+
+	agent, err := adk.NewChatModelAgent(ctx, &adk.ChatModelAgentConfig{
+		Name:        "time_agent",
+		Description: "时间计算器",
+		Instruction: "",
+		Model:       chatModel,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	runner := adk.NewRunner(ctx, adk.RunnerConfig{
+		Agent: agent,
+	})
+	iter := runner.Run(ctx, messages)
+
+	var lastMsg adk.Message
+	for {
+		event, ok := iter.Next()
+		if !ok {
+			break
+		}
+		if event.Err != nil {
+			log.Fatal(event.Err)
+		}
+		msg, err := event.Output.MessageOutput.GetMessage()
+		if err != nil {
+			log.Fatal(err)
+		}
+		lastMsg = msg
+	}
+
+	fmt.Println("【最终答案】")
+	if lastMsg.Role == schema.Assistant && len(lastMsg.Content) > 0 {
+		fmt.Println(lastMsg.Content)
 	}
 }

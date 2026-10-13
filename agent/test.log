@@ -1,0 +1,15 @@
+PS C:\Users\18101\Desktop\go_ai_agent\golang_ai_agent> go test -v ./agent -run=^TestRunChatModelAgent$ -count=1   
+=== RUN   TestRunChatModelAgent
+【最终答案】
+今天是2026年10月13日，到2027年1月1日元旦还有 **80天**。
+
+计算方式：  
+- 2026年10月13日到10月31日：18天  
+- 11月：30天  
+- 12月：31天  
+- 合计：18 + 30 + 31 = **79天**  
+- 到2027年1月1日还需再加 **1天**，所以是 **80天**。
+--- PASS: TestRunChatModelAgent (1.05s)
+PASS
+ok      libai/golang_ai_agent/agent     2.006s
+PS C:\Users\18101\Desktop\go_ai_agent\golang_ai_agent> 

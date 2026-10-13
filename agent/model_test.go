@@ -14,3 +14,9 @@ func TestRunChatModel(t *testing.T) {
 }
 
 // go test -v ./agent -run=^TestRunChatModel$ -count=1
+
+func TestRunChatModelAgent(t *testing.T) {
+	llm.RunChatModelAgent()
+}
+
+// go test -v ./agent -run=^TestRunChatModelAgent$ -count=1
