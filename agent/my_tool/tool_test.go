@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestUserTimeTool(t *testing.T) {
+func TestUseTimeTool(t *testing.T) {
 	fmt.Print("纽约时间 ")
 	mytool.UseTimeTool("America/New_York")
 	fmt.Print("伦敦时间 ")
@@ -15,13 +15,17 @@ func TestUserTimeTool(t *testing.T) {
 	mytool.UseTimeTool("")
 }
 
+// go test -v ./agent/my_tool -run=^TestUseTimeTool$ -count=1
 func TestUseLocationTool(t *testing.T) {
 	mytool.UseLocationTool()
 }
 
+// go test -v ./agent/my_tool -run=^TestUseLocationTool$ -count=1
 func TestUseWeatherTool(t *testing.T) {
 	mytool.UseWeatherTool(0)
 	mytool.UseWeatherTool(1)
 	mytool.UseWeatherTool(4)
 	mytool.UseWeatherTool(5) // 数day非法
 }
+
+// go test -v ./agent/my_tool -run=^TestUseWeatherTool$ -count=1

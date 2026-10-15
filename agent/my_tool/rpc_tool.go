@@ -147,7 +147,7 @@ type WeatherInfo struct {
 func WeatherForcast(GaodeCityCode string, live bool) *WeatherInfo {
 	url := "https://restapi.amap.com/v3/weather/weatherInfo?key=" + GAODE_KEY + "&city=" + GaodeCityCode
 	if !live {
-		url += "&extension=all"
+		url += "&extensions=all"
 	}
 	data, err := HttpGet(url)
 	if err != nil {
@@ -245,7 +245,7 @@ func UseWeatherTool(day int) {
 	tool := CreateWeatherTool()
 
 	weatherRequest := WeatherParams{
-		CityCode: "510101",
+		CityCode: "510100",
 		Day:      strconv.Itoa(day),
 	}
 	jsonReq, err := sonic.Marshal(weatherRequest)
