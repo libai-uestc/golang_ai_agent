@@ -29,3 +29,11 @@ func TestUseWeatherTool(t *testing.T) {
 }
 
 // go test -v ./agent/my_tool -run=^TestUseWeatherTool$ -count=1
+
+func TestMcpTool(t *testing.T) {
+	mytool.InitMcpClient()
+	// mytool.List12306Tool()
+	mytool.Use12306Tool()
+}
+
+// go test -v ./agent/my_tool -run=^TestMcpTool$ -count=1
