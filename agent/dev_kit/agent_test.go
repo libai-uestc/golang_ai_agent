@@ -44,3 +44,9 @@ func TestSearchAgent(t *testing.T) {
 }
 
 // go test -v ./agent/dev_kit -run=^TestSearchAgent$ -count=1
+
+func TestTripAgent(t *testing.T) {
+	devkit.TripAgent()
+}
+
+// go test -v ./agent/dev_kit -run=^TestTripAgent$ -count=1
