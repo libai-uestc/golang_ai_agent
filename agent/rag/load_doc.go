@@ -118,6 +118,6 @@ func TransformDocument(markdownFile string) {
 
 	transformedDocs, _ := splitTransformer.Transform(ctx, []*schema.Document{doc})
 	for idx, seg := range transformedDocs {
-		fmt.Println("segment %d, content : %s\n", idx, seg.Content)
+		fmt.Printf("segment %d, content : %s\n", idx, seg.Content)
 	}
 }

@@ -22,15 +22,37 @@ const (
 	VECTOR_DIM = 2560
 )
 
+// func GetEmbedder() *ark.Embedder {
+// 	embedderOnce.Do(func() {
+// 		ctx := context.Background()
+// 		timeout := 3 * time.Second
+// 		retryTimes := 3
+// 		var err error
+// 		embedder, err = ark.NewEmbedder(ctx, &ark.EmbeddingConfig{
+// 			APIKey:     os.Getenv("ARK_API_KEY"),
+// 			Model:      "ep-20261027112426-vnlg2",
+// 			Timeout:    &timeout,
+// 			RetryTimes: &retryTimes,
+// 		})
+// 		if err != nil {
+// 			log.Fatal(err)
+// 		}
+// 	})
+// 	return embedder
+// }
+
 func GetEmbedder() *ark.Embedder {
 	embedderOnce.Do(func() {
 		ctx := context.Background()
-		timeout := 3 * time.Second
+		timeout := 30 * time.Second
 		retryTimes := 3
+		apiType := ark.APITypeMultiModal // 显式指定使用多模态 Embedding 接口
+
 		var err error
 		embedder, err = ark.NewEmbedder(ctx, &ark.EmbeddingConfig{
 			APIKey:     os.Getenv("ARK_API_KEY"),
-			Model:      "",
+			Model:      "ep-20261027112426-vnlg2", // 你的 vision 接入点 ID
+			APIType:    &apiType,                  // 关键：切换到多模态端点
 			Timeout:    &timeout,
 			RetryTimes: &retryTimes,
 		})
@@ -104,7 +126,7 @@ func WordSim() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	words = []string{"滑冰", "杭州"}
+	words = []string{"打排球", "粤港澳"}
 	vectors := Embedding(words)
 	for i, vector := range vectors {
 		dot, err := InnerProduct(vector, doc1)
