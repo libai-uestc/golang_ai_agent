@@ -7,7 +7,9 @@ import (
 	"log"
 	"strings"
 
+	"github.com/cloudwego/eino/callbacks"
 	"github.com/cloudwego/eino/compose"
+	// "github.com/cloudwego/eino/schema"
 )
 
 type TA struct {
@@ -74,9 +76,9 @@ func ComposeGraph(msg string) {
 	fmt.Println(result.Data)
 }
 
-func GrapWithCallBack(msg string) {
+func GraphWithCallBack(msg string) {
 	ctx := context.Background()
-
+	callbacks.AppendGlobalHandlers(&llm.LoggerCallbacks{})
 	node1 := compose.InvokableLambda(func(ctx context.Context, input *TA) (output *TB, err error) {
 		return &TB{len(input.Data)}, nil
 	})
@@ -122,6 +124,7 @@ func GrapWithCallBack(msg string) {
 	result, err := runnable.Invoke(ctx, input,
 		compose.WithCallbacks(llm.GetStartCallback()), // 仅针对本次运行使用的callback
 	)
+	// result, err := runnable.Invoke(ctx, input) // compose.WithCallbacks(llm.GetStartCallback()), // 仅针对本次运行使用的callback
 
 	if err != nil {
 		log.Fatal(err)
