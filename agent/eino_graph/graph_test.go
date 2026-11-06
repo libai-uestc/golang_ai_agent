@@ -25,3 +25,9 @@ func TestGraphWithState(t *testing.T) {
 	einograph.GraphWithState("hello, how are you")
 	einograph.GraphWithState("hello, how are you!")
 }
+
+func TestGraphOfChain(t *testing.T) {
+	einograph.GraphOfChain()
+}
+
+// go test -v ./agent/eino_graph -run=^TestGraphOfChain$ -count=1
