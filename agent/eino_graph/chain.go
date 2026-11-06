@@ -83,7 +83,7 @@ func GraphOfChain() {
 		compose.WithStatePostHandler(func(ctx context.Context, out []*schema.Message, state *HistoryMessage) ([]*schema.Message, error) {
 			result := []*schema.Message{{Role: schema.System, Content: state.SystemMessage}}
 			result = append(result, state.History...)
-			result = append(result, &schema.Message{Role: schema.User, Content: state.SystemMessage})
+			result = append(result, &schema.Message{Role: schema.User, Content: state.UserMessage})
 			return result, nil
 		},
 		))

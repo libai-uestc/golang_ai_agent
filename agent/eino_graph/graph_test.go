@@ -31,3 +31,9 @@ func TestGraphOfChain(t *testing.T) {
 }
 
 // go test -v ./agent/eino_graph -run=^TestGraphOfChain$ -count=1
+
+func TestGraphOfReact(t *testing.T) {
+	einograph.GraphOfReact()
+}
+
+// go test -v ./agent/eino_graph -run=^TestGraphOfReact$ -count=1
